@@ -1,0 +1,6 @@
+[submodule "Ccache.cmake"]
+	path = internals/core/Ccache.cmake
+	url = https://github.com/TheLartians/Ccache.cmake
+[submodule "vcpkg"]
+	path = internals/core/vcpkg
+	url = https://github.com/microsoft/vcpkg

@@ -1,0 +1,19 @@
+[
+  {
+    "name": "clang",
+    "compilers": {
+      "C": "/usr/bin/clang",
+      "CC": "/usr/bin/clang",
+      "CXX": "/usr/bin/clang++"
+    },
+    "toolchainFile": "./internals/core/vcpkg/scripts/buildsystems/vcpkg.cmake"
+  },
+  {
+    "name": "GCC cuda",
+    "compilers": {
+      "C": "/opt/cuda/bin/gcc",
+      "CC": "/opt/cuda/bin/gcc",
+      "CXX": "/opt/cuda/bin/g++"
+    }
+  }
+]

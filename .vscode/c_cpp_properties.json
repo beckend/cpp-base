@@ -1,0 +1,9 @@
+{
+  "configurations": [
+    {
+      "name": "Default",
+      "configurationProvider": "ms-vscode.cmake-tools"
+    }
+  ],
+  "version": 4
+}

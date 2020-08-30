@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake Build",
+      "command": "build",
+      "type": "cmake",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run CMake binary",
+      "type": "shell",
+      "command": "./build/bin/App",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
