@@ -1,0 +1,41 @@
+set(CMAKE_C_COMPILER $ENV{CC})
+set(CMAKE_CC_COMPILER $ENV{CC})
+set(CMAKE_CXX_COMPILER $ENV{CXX})
+set(CMAKE_CXX_STANDARD 20)
+
+include(CTest)
+enable_testing()
+
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+include(CPack)
+
+set_target_properties(
+    ${PROJECT_NAME}
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
+set(CMAKE_C_FLAGS_RELEASE "-march=native -O2 -pipe -fno-plt -std=c++20")
+set(CMAKE_CC_FLAGS_RELEASE ${CMAKE_C_FLAGS_RELEASE})
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}")
+
+set(CMAKE_C_FLAGS_DDEBUG "-g")
+set(CMAKE_CC_FLAGS_DDEBUG "${CMAKE_C_FLAGS_DDEBUG}")
+set(CMAKE_CXX_FLAGS_DDEBUG "${CMAKE_C_FLAGS_DDEBUG}")
+set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl -lstdc++fs -std=c++20 -lpthread -lm")
+
+if($ENV{CC} MATCHES "clang")
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -std=c++20 -fcoroutines-ts")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}")
+    set(CMAKE_C_FLAGS_DDEBUG "${CMAKE_C_FLAGS_DDEBUG} -std=c++20 -fcoroutines-ts")
+    set(CMAKE_CXX_FLAGS_DDEBUG "${CMAKE_C_FLAGS_DDEBUG}")
+else()
+    set(CMAKE_C_FLAGS_DDEBUG "${CMAKE_C_FLAGS_DDEBUG} -fvar-tracking-assignments -std=c++20")
+    set(CMAKE_CXX_FLAGS_DDEBUG "${CMAKE_C_FLAGS_DDEBUG}")    
+endif()
+
+add_subdirectory(${PROJECT_SOURCE_DIR}/internals/core/Ccache.cmake)
+set(USE_CCACHE True)
